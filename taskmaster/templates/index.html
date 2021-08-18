@@ -12,7 +12,24 @@
             <th>Actions</th>
         </tr>
         {% for task in tasks %}
+        <tr>
+            <td>
+                {{ task.name }}
+            </td>
+            <td>
+                {{ task.created.date() }}
+            </td>
+            <td>
+                <a href="/update/{{ task.id }}">Update</a>
+                <br>
+                <a href="/delete/{{ task.id }}">Delete</a>
+            </td>
+        </tr>
         {% endfor %}
     </table>
+    <form action="/" method="POST">
+        <input type="text" name="name" id="name">
+        <input type="submit" value="add">
+    </form>
 </div>
 {% endblock %}
