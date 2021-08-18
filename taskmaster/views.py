@@ -24,4 +24,12 @@ def delete(id):
         return redirect('/')
     except:
         return "Cannot Delete Record"
-    
+
+@app.route('/update/<int:id>', methods=["GET", "POST"])
+def update(id):
+    task = Todo.query.filter_by(id=id).first()
+    if request.method == "POST":
+        task.name = request.form['name']
+        db.session.commit()
+        return redirect('/')
+    return render_template('update.html', task=task)
