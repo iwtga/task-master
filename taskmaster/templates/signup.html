@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block body %}
+<div>
+    <div>
+        <form action="{{ url_for('signup') }}" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.email.label }} <br>
+            {{ form.email }} <br><br>
+            {{ form.username.label }} <br>
+            {{ form.username }} <br><br>
+            {{ form.password.label }} <br>
+            {{ form.password }} <br><br>
+            {{ form.confirm_password.label }} <br>
+            {{ form.confirm_password }} <br><br>
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -2,7 +2,7 @@ from flask import render_template, request, redirect
 from werkzeug.utils import redirect
 from taskmaster import app, db
 from taskmaster.models import Todo
-from taskmaster.forms import LoginForm
+from taskmaster.forms import LoginForm, SignupForm
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -18,7 +18,8 @@ def index():
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
-    return render_template("signup.html")
+    form = SignupForm()
+    return render_template("signup.html", form=form)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
