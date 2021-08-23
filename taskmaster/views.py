@@ -2,6 +2,7 @@ from flask import render_template, request, redirect
 from werkzeug.utils import redirect
 from taskmaster import app, db
 from taskmaster.models import Todo
+from taskmaster.forms import LoginForm
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -14,6 +15,15 @@ def index():
             return "Could not add task"
     tasks = Todo.query.order_by(Todo.created).all()
     return render_template('index.html', tasks=tasks)
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    return render_template("signup.html")
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    return render_template("login.html", form=form)
 
 @app.route('/delete/<int:id>')
 def delete(id):
