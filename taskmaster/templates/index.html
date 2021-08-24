@@ -9,11 +9,11 @@
     <h4>Hello, {{ username }}</h4>
 
     <form action="{{ url_for('index') }}" method="POST">
-        {{ hidden_tag() }}
+        {{ form.hidden_tag() }}
         {{ form.name }}
         {{ form.submit }}
     </form>
-    
+
     <table>
         <tr>
             <th>Task</th>

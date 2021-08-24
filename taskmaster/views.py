@@ -20,7 +20,7 @@ def index():
             flash("Could Not Add Task!", category="error")
     tasks = current_user.tasks
     username = current_user.username
-    return render_template('index.html', tasks=tasks, username=username)
+    return render_template('index.html', tasks=tasks, username=username, form=form)
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -35,14 +35,14 @@ def register():
                     user = User(email=email, username=username, password=hashed_password)
                     db.session.add(user)
                     db.session.commit()
-                    flash("User Registered Successfully! You can log in now!")
+                    flash("User Registered Successfully! You can log in now!", category="info")
                     return redirect(url_for('login'))
                 except:
-                    flash("Something went wrong, while adding user!")
+                    flash("Something went wrong, while adding user!", category="error")
             else:
-                flash("Username Already Taken!")
+                flash("Username Already Taken!", category="error")
         else:
-            flash("Email Already Taken!")
+            flash("Email Already Taken!", category="error")
     return render_template("register.html", form=form)
 
 @app.route('/login', methods=["GET", "POST"])
@@ -51,12 +51,12 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
-            if check_password_hash(user.passworc, form.password.data):
+            if check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember.data)
                 next = request.args.get('next')
                 flash("User Logged in successfully!", category="info")
                 return redirect(next or url_for('index'))
-        flash("Username or Password Incorrect")
+        flash("Username or Password Incorrect", category="error")
     return render_template("login.html", form=form)
 
 @app.route('/logout')
