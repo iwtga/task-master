@@ -11,6 +11,7 @@
     {{ form.password.label }} <br>
     {{ form.password }} <br>
     {{ form.remember }} {{ form.remember.label }} <br><br>
-    {{ form.submit(class_="submit") }}
+    {{ form.submit(class_="submit") }} <br><br>
+    <a href="{{ url_for('register') }}" style="color: inherit;">Don't have an account? Create now!</a>
 </form>
 {% endblock %}

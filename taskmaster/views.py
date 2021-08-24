@@ -18,10 +18,10 @@ def index():
     tasks = Todo.query.order_by(Todo.created).all()
     return render_template('index.html', tasks=tasks)
 
-@app.route('/signup', methods=["GET", "POST"])
-def signup():
+@app.route('/register', methods=["GET", "POST"])
+def register():
     form = SignupForm()
-    return render_template("signup.html", form=form)
+    return render_template("register.html", form=form)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
