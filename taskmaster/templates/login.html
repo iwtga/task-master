@@ -3,17 +3,14 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-<div>
-    <div>
-        <form action="{{ url_for('login') }}" method="POST">
-            {{ form.hidden_tag() }}
-            {{ form.username.label }} <br>
-            {{ form.username }} <br><br>
-            {{ form.password.label }} <br>
-            {{ form.password }} <br>
-            {{ form.remember }} {{ form.remember.label }} <br><br>
-            {{ form.submit }}
-        </form>
-    </div>
-</div>
+<form action="{{ url_for('login') }}" method="POST">
+    <h1 style="text-align: center;">LOGIN</h1>
+    {{ form.hidden_tag() }}
+    {{ form.username.label }} <br>
+    {{ form.username }} <br><br>
+    {{ form.password.label }} <br>
+    {{ form.password }} <br>
+    {{ form.remember }} {{ form.remember.label }} <br><br>
+    {{ form.submit(class_="submit") }}
+</form>
 {% endblock %}

@@ -1,3 +1,19 @@
 * {
-    font-family: sans-serif;
+    font-family: monospace;
+}
+
+body {
+    background-image: url(https://wallpaperaccess.com/full/1423593.jpg);
+}
+
+form {
+    width: 20%;
+    margin: auto;
+    background-color: rgba(255, 215, 0, 0.6);
+    padding: 0 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-top: 12%;
+    padding-bottom: 20px;
+    text-align: center;
 }
