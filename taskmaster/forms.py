@@ -16,5 +16,9 @@ class SignupForm(FlaskForm):
     submit = SubmitField("Register")
 
 class TaskForm(FlaskForm):
-    name = StringField("Task", validators=[InputRequired()])
+    name = StringField("Task", validators=[InputRequired(), Length(max=50)])
     submit = SubmitField("Add")
+
+class UpdateForm(FlaskForm):
+    name = StringField("Task", validators=[InputRequired(), Length(max=50)])
+    submit = SubmitField("Update")

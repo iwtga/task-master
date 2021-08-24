@@ -6,8 +6,9 @@
 <div>
     <h1>Update</h1>
     <form action="/update/{{ task.id }}" method="POST">
-        <input type="text" name="name" id="name" value="{{ task.name }}">
-        <input type="submit" value="Update">
+        {{ form.hidden_tag() }}
+        {{ form.name(placeholder={{ task.name }}) }}
+        {{ form.submit }}
     </form>
 </div>
 {% endblock %}

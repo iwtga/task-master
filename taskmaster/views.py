@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, flash
 from flask.helpers import url_for
 from taskmaster import app, db
 from taskmaster.models import Todo, User
-from taskmaster.forms import LoginForm, SignupForm, TaskForm
+from taskmaster.forms import LoginForm, SignupForm, TaskForm, UpdateForm
 from flask_login import login_required, current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -81,9 +81,14 @@ def delete(id):
 @app.route('/update/<int:id>', methods=["GET", "POST"])
 @login_required
 def update(id):
+    form = UpdateForm()
     task = Todo.query.filter_by(id=id).first()
-    if request.method == "POST":
-        task.name = request.form['name']
-        db.session.commit()
-        return redirect('/')
+    if form.validate_on_submit():
+        task.name = form.name.data
+        try:
+            db.session.commit()
+            flash("Task Updated Successfully!")
+            redirect(url_for('index'))
+        except:
+            flash("Could not update Task!")
     return render_template('update.html', task=task)
