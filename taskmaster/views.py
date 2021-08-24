@@ -1,9 +1,10 @@
-from flask import render_template, request, redirect
-from werkzeug.utils import redirect
+from flask import render_template, request, redirect, flash
+from flask.helpers import url_for
 from taskmaster import app, db
-from taskmaster.models import Todo
+from taskmaster.models import Todo, User
 from taskmaster.forms import LoginForm, SignupForm
 from flask_login import login_required, current_user, login_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/', methods=["GET", "POST"])
 @login_required
@@ -21,6 +22,24 @@ def index():
 @app.route('/register', methods=["GET", "POST"])
 def register():
     form = SignupForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.username.data
+        hashed_password = generate_password_hash(form.password.data)
+        if not User.query.filter_by(email=email).first():
+            if not User.query.filter_by(username=username).first():
+                try:
+                    user = User(email=email, username=username, password=hashed_password)
+                    db.session.add(user)
+                    db.session.commit()
+                    flash("User Registered Successfully! You can log in now!")
+                    return redirect(url_for('login'))
+                except:
+                    flash("Something went wrong, while adding user!")
+            else:
+                flash("Username Already Taken!")
+        else:
+            flash("Email Already Taken!")
     return render_template("register.html", form=form)
 
 @app.route('/login', methods=["GET", "POST"])
