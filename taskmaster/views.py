@@ -15,8 +15,9 @@ def index():
             task = Todo(name=form.name.data, owner=current_user)
             db.session.add(task)
             db.session.commit()
+            flash("Task Added Successfully", category="info")
         except:
-            flash("Could Not Add Task!")
+            flash("Could Not Add Task!", category="error")
     tasks = current_user.tasks
     username = current_user.username
     return render_template('index.html', tasks=tasks, username=username)
@@ -53,6 +54,7 @@ def login():
             if check_password_hash(user.passworc, form.password.data):
                 login_user(user, remember=form.remember.data)
                 next = request.args.get('next')
+                flash("User Logged in successfully!", category="info")
                 return redirect(next or url_for('index'))
         flash("Username or Password Incorrect")
     return render_template("login.html", form=form)
@@ -61,7 +63,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash("Logged out successfully")
+    flash("Logged out successfully", category="info")
     return redirect(url_for('login'))
 
 @app.route('/delete/<int:id>')
@@ -71,9 +73,10 @@ def delete(id):
     try:
         db.session.delete(task)
         db.session.commit()
-        return redirect('/')
+        flash("Task Deleted Successfully!", category="info")
     except:
-        return "Cannot Delete Record"
+        flash("Cannot Delete Task!", category="error")
+    return redirect(url_for("index"))
 
 @app.route('/update/<int:id>', methods=["GET", "POST"])
 @login_required
