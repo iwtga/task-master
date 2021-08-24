@@ -17,7 +17,8 @@ def index():
         except:
             return "Could not add task"
     tasks = Todo.query.order_by(Todo.created).all()
-    return render_template('index.html', tasks=tasks)
+    username = current_user.username
+    return render_template('index.html', tasks=tasks, username=username)
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -45,7 +46,21 @@ def register():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            if check_password_hash(user.passworc, form.password.data):
+                login_user(user, remember=form.remember.data)
+                next = request.args.get('next')
+                return redirect(next or url_for('index'))
+        flash("Username or Password Incorrect")
     return render_template("login.html", form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/delete/<int:id>')
 @login_required
