@@ -3,6 +3,20 @@
 {% block title %}Index{% endblock %}
 
 {% block body %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
 <div>
     <h1>Task Master</h1>
     <h4>Hello, {{ username }}</h4>
@@ -28,9 +42,10 @@
         </tr>
         {% endfor %}
     </table>
-    <form action="/" method="POST">
-        <input type="text" name="name" id="name">
-        <input type="submit" value="Add">
+    <form action="{{ url_for('index') }}" method="POST">
+        {{ hidden_tag() }}
+        {{ form.name }}
+        {{ form.submit }}
     </form>
 </div>
 {% endblock %}

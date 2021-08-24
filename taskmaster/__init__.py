@@ -5,7 +5,10 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 import os
 
-load_dotenv()
+try:
+    load_dotenv()
+except:
+    pass
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 

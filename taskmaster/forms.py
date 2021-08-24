@@ -14,3 +14,7 @@ class SignupForm(FlaskForm):
     password = PasswordField("Password", validators=[InputRequired(), Length(min=8, max=80)])
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired(), Length(min=8, max=80), EqualTo('password')])
     submit = SubmitField("Register")
+
+class TaskForm(FlaskForm):
+    name = StringField("Task", validators=[InputRequired()])
+    submit = SubmitField("Add")

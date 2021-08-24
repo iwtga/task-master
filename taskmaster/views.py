@@ -2,21 +2,22 @@ from flask import render_template, request, redirect, flash
 from flask.helpers import url_for
 from taskmaster import app, db
 from taskmaster.models import Todo, User
-from taskmaster.forms import LoginForm, SignupForm
+from taskmaster.forms import LoginForm, SignupForm, TaskForm
 from flask_login import login_required, current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/', methods=["GET", "POST"])
 @login_required
 def index():
-    if request.method == "POST":
+    form = TaskForm()
+    if form.validate_on_submit():
         try:
-            task = Todo(name=request.form['name'])
+            task = Todo(name=form.name.data, owner=current_user)
             db.session.add(task)
             db.session.commit()
         except:
-            return "Could not add task"
-    tasks = Todo.query.order_by(Todo.created).all()
+            flash("Could Not Add Task!")
+    tasks = current_user.tasks
     username = current_user.username
     return render_template('index.html', tasks=tasks, username=username)
 
@@ -60,6 +61,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash("Logged out successfully")
     return redirect(url_for('login'))
 
 @app.route('/delete/<int:id>')
