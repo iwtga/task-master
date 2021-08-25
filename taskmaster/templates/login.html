@@ -6,10 +6,33 @@
 <form action="{{ url_for('login') }}" method="POST" class="auth">
     <h1 style="text-align: center;">LOGIN</h1>
     {{ form.hidden_tag() }}
+
     {{ form.username.label }} <br>
-    {{ form.username(placeholder="Enter Username") }} <br><br>
+    {% if form.username.errors %}
+        {{ form.username(class_="is-invalid", placeholder="Enter Username") }}
+        <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <br><br>
+    {% else %}
+        {{ form.username(placeholder="Enter Username") }} <br><br>
+    {% endif %}
+
     {{ form.password.label }} <br>
-    {{ form.password(placeholder="Enter Password") }} <br><br>
+    {% if form.password.errors %}
+        {{ form.password(class_="is-invalid", placeholder="Enter Password") }}
+        <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <br><br>
+    {% else %}
+        {{ form.password(placeholder="Enter Password") }} <br><br>
+    {% endif %}
+
     {{ form.remember }} {{ form.remember.label }} <br><br>
     {{ form.submit(class_="submit") }} <br><br>
     <a href="{{ url_for('register') }}" style="color: inherit;">Don't have an account? Create now!</a>
