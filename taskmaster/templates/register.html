@@ -3,17 +3,18 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block body %}
-<form action="{{ url_for('register') }}" method="POST">
+<form action="{{ url_for('register') }}" method="POST" class="auth">
     <h1 style="text-align: center;">REGISTER</h1>
     {{ form.hidden_tag() }}
     {{ form.email.label }} <br>
-    {{ form.email }} <br><br>
+    {{ form.email(placeholder="Enter email") }} <br><br>
     {{ form.username.label }} <br>
-    {{ form.username }} <br><br>
+    {{ form.username(placeholder="Enter Username") }} <br><br>
     {{ form.password.label }} <br>
-    {{ form.password }} <br><br>
+    {{ form.password(placeholder="Enter Password") }} <br><br>
     {{ form.confirm_password.label }} <br>
-    {{ form.confirm_password }} <br><br>
-    {{ form.submit(class_="submit") }}
+    {{ form.confirm_password(placeholder="Re-enter Password") }} <br><br>
+    {{ form.submit(class_="submit") }} <br><br>
+    <a href="{{ url_for('login') }}" style="color: inherit;">Already have an account? Login!</a>
 </form>
 {% endblock %}

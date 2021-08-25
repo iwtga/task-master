@@ -2,11 +2,7 @@
     font-family: monospace;
 }
 
-body {
-    background-image: url(https://wallpaperaccess.com/full/1423593.jpg);
-}
-
-form {
+.auth {
     font-weight: bold;
     width: 20%;
     margin: auto;
@@ -15,6 +11,6 @@ form {
     border: 2px solid black;
     border-radius: 4px;
     margin-top: 12%;
-    padding-bottom: 20px;
+    padding: 20px 0;
     text-align: center;
 }
