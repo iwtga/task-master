@@ -6,14 +6,59 @@
 <form action="{{ url_for('register') }}" method="POST" class="auth">
     <h1 style="text-align: center;">REGISTER</h1>
     {{ form.hidden_tag() }}
+
     {{ form.email.label }} <br>
-    {{ form.email(placeholder="Enter email") }} <br><br>
+    {% if form.email.errors %}
+        {{ form.email(class="is-invalid", placeholder="Enter email") }}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <br>
+    {% else %}
+        {{ form.email(placeholder="Enter email") }} <br><br>
+    {% endif %}
+
     {{ form.username.label }} <br>
-    {{ form.username(placeholder="Enter Username") }} <br><br>
+    {% if form.username.errors %}
+        {{ form.username(class_="is-invalid", placeholder="Enter username") }}
+        <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <br>
+    {% else %}
+        {{ form.username(placeholder="Enter username") }} <br><br>
+    {% endif %}
+
     {{ form.password.label }} <br>
-    {{ form.password(placeholder="Enter Password") }} <br><br>
+    {% if form.password.errors %}
+        {{ form.password(class_="is-invalid", placeholder="Enter password") }}
+        <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <br>
+    {% else %}
+        {{ form.password(placeholder="Enter password") }} <br><br>
+    {% endif %}
+
     {{ form.confirm_password.label }} <br>
-    {{ form.confirm_password(placeholder="Re-enter Password") }} <br><br>
+    {% if form.confirm_password.errors %}
+        {{ form.confirm_password(class_="is-invalid", placeholder="Re-enter password") }}
+        <div class="invalid-feedback">
+            {% for error in form.confirm_password.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <br>
+    {% else %}
+        {{ form.confirm_password(placeholder="Re-enter password") }} <br><br>
+    {% endif %}
+
     {{ form.submit(class_="submit") }} <br><br>
     <a href="{{ url_for('login') }}" style="color: inherit;">Already have an account? Login!</a>
 </form>

@@ -9,28 +9,28 @@
 
     {{ form.username.label }} <br>
     {% if form.username.errors %}
-        {{ form.username(class_="is-invalid", placeholder="Enter Username") }}
+        {{ form.username(class_="is-invalid", placeholder="Enter username") }}
         <div class="invalid-feedback">
             {% for error in form.username.errors %}
                 <span>{{ error }}</span>
             {% endfor %}
         </div>
-        <br><br>
+        <br>
     {% else %}
-        {{ form.username(placeholder="Enter Username") }} <br><br>
+        {{ form.username(placeholder="Enter username") }} <br><br>
     {% endif %}
 
     {{ form.password.label }} <br>
     {% if form.password.errors %}
-        {{ form.password(class_="is-invalid", placeholder="Enter Password") }}
+        {{ form.password(class_="is-invalid", placeholder="Enter password") }}
         <div class="invalid-feedback">
             {% for error in form.password.errors %}
                 <span>{{ error }}</span>
             {% endfor %}
         </div>
-        <br><br>
+        <br>
     {% else %}
-        {{ form.password(placeholder="Enter Password") }} <br><br>
+        {{ form.password(placeholder="Enter password") }} <br><br>
     {% endif %}
 
     {{ form.remember }} {{ form.remember.label }} <br><br>
