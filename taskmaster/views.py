@@ -29,7 +29,7 @@ def register():
     form = SignupForm()
     if form.validate_on_submit():
         username = form.username.data
-        email = form.username.data
+        email = form.email.data
         hashed_password = generate_password_hash(form.password.data)
         if not User.query.filter_by(email=email).first():
             if not User.query.filter_by(username=username).first():
