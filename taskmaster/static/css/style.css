@@ -31,3 +31,8 @@
     top: 15px;
     right: 15px;
 }
+
+.head {
+    text-decoration: none;
+    color: inherit;
+}

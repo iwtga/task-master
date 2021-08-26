@@ -6,7 +6,7 @@
 <a href="{{ url_for('logout') }}"><button type="button" class="btn btn-danger logout">Logout</button></a>
 
 <div class="main-content">
-    <h1>Task Master</h1>
+    <a class="head" href="{{ url_for('index') }}"><h1>Task Master</h1></a>
     <h4>Hello, {{ username }}</h4>
     <br>
     <form action="{{ url_for('index') }}" method="POST">

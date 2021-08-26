@@ -3,8 +3,11 @@
 {% block title %}Update Task{% endblock %}
 
 {% block body %}
+<a href="{{ url_for('logout') }}"><button type="button" class="btn btn-danger logout">Logout</button></a>
+
 <div class="main-content">
-    <h1>Update Task</h1>
+    <a class="head" href="{{ url_for('index') }}"><h1>Task Master</h1></a>
+    <h4>Update Task</h4>
     <form action="/update/{{ task.id }}" method="POST">
         {{ form.hidden_tag() }}
         {{ form.name(class_="form-input", value=task.name, autofocus=true) }}
