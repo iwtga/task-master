@@ -25,3 +25,9 @@
 .form-input {
     width: 50%;
 }
+
+.logout {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
