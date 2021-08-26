@@ -90,7 +90,7 @@ def update(id):
         try:
             db.session.commit()
             flash("Task Updated Successfully!")
-            redirect(url_for('index'))
+            return redirect(url_for('index'))
         except:
             flash("Could not update Task!")
-    return render_template('update.html', task=task)
+    return render_template('update.html', task=task, form=form)

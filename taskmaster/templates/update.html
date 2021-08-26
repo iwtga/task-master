@@ -3,11 +3,11 @@
 {% block title %}Update Task{% endblock %}
 
 {% block body %}
-<div>
-    <h1>Update</h1>
+<div class="main-content">
+    <h1>Update Task</h1>
     <form action="/update/{{ task.id }}" method="POST">
         {{ form.hidden_tag() }}
-        {{ form.name(placeholder={{ task.name }}) }}
+        {{ form.name(class_="form-input", value=task.name, autofocus=true) }}
         {{ form.submit }}
     </form>
 </div>

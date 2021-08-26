@@ -7,32 +7,36 @@
 <div class="main-content">
     <h1>Task Master</h1>
     <h4>Hello, {{ username }}</h4>
-
+    <br>
     <form action="{{ url_for('index') }}" method="POST">
         {{ form.hidden_tag() }}
-        {{ form.name }}
+        {{ form.name(class_="form-input", placeholder="Enter task", autofocus=true) }}
         {{ form.submit }}
     </form>
     <br>
     <br>
-    <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Task</th>
-                <th scope="col">Date Created</th>
-                <th scope="col" colspan="2">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.name }}</td>
-                <td>{{ task.created.date() }}</td>
-                <td><a href="/update/{{ task.id }}">Update</a></td>
-                <td><a href="/delete/{{ task.id }}">Delete</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% if tasks %}
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.created.date() }}</td>
+                    <td><a href="/update/{{ task.id }}">Update</a></td>
+                    <td><a href="/delete/{{ task.id }}">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h4>No Tasks! Add Tasks to Display!</h4>
+    {% endif %}
 </div>
 {% endblock %}
