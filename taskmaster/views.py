@@ -16,8 +16,10 @@ def index():
             db.session.add(task)
             db.session.commit()
             flash("Task Added Successfully", category="info")
+            return redirect(url_for("index"))
         except:
             flash("Could Not Add Task!", category="error")
+            return redirect(url_for('index'))
     tasks = current_user.tasks
     username = current_user.username
     return render_template('index.html', tasks=tasks, username=username, form=form)

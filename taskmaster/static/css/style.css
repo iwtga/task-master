@@ -2,6 +2,13 @@
     font-family: monospace;
 }
 
+.main-content {
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
 .auth {
     font-weight: bold;
     width: 20%;

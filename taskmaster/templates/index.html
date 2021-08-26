@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div>
+<div class="main-content">
     <h1>Task Master</h1>
     <h4>Hello, {{ username }}</h4>
 
@@ -13,28 +13,26 @@
         {{ form.name }}
         {{ form.submit }}
     </form>
-
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Created on</th>
-            <th>Actions</th>
-        </tr>
+    <br>
+    <br>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Date Created</th>
+                <th scope="col" colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for task in tasks %}
-        <tr>
-            <td>
-                {{ task.name }}
-            </td>
-            <td>
-                {{ task.created.date() }}
-            </td>
-            <td>
-                <a href="/update/{{ task.id }}">Update</a>
-                <br>
-                <a href="/delete/{{ task.id }}">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.created.date() }}</td>
+                <td><a href="/update/{{ task.id }}">Update</a></td>
+                <td><a href="/delete/{{ task.id }}">Delete</a></td>
+            </tr>
         {% endfor %}
+        </tbody>
     </table>
 </div>
 {% endblock %}
