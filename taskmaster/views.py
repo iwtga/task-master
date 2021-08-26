@@ -17,7 +17,8 @@ def index():
             db.session.commit()
             flash("Task Added Successfully", category="info")
             return redirect(url_for("index"))
-        except:
+        except Exception as e:
+            print(e)
             flash("Could Not Add Task!", category="error")
             return redirect(url_for('index'))
     tasks = current_user.tasks
@@ -39,7 +40,8 @@ def register():
                     db.session.commit()
                     flash("User Registered Successfully! You can log in now!", category="info")
                     return redirect(url_for('login'))
-                except:
+                except Exception as e:
+                    print(e)
                     flash("Something went wrong, while adding user!", category="error")
             else:
                 flash("Username Already Taken!", category="error")
@@ -76,7 +78,8 @@ def delete(id):
         db.session.delete(task)
         db.session.commit()
         flash("Task Deleted Successfully!", category="info")
-    except:
+    except Exception as e:
+        print(e)
         flash("Cannot Delete Task!", category="error")
     return redirect(url_for("index"))
 
@@ -91,6 +94,7 @@ def update(id):
             db.session.commit()
             flash("Task Updated Successfully!")
             return redirect(url_for('index'))
-        except:
+        except Exception as e:
+            print(e)
             flash("Could not update Task!")
     return render_template('update.html', task=task, form=form)
