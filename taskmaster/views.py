@@ -21,7 +21,8 @@ def index():
             print(e)
             flash("Could Not Add Task!", category="error")
             return redirect(url_for('index'))
-    tasks = current_user.tasks
+    page = request.args.get("page", 1, int)
+    tasks = Todo.query.filter_by(owner=current_user).paginate(per_page=10, page=page)
     username = current_user.username
     return render_template('index.html', tasks=tasks, username=username, form=form)
 

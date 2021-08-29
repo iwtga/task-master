@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for task in tasks %}
+            {% for task in tasks.items %}
                 <tr>
                     <td>{{ task.name }}</td>
                     <td>{{ task.created.date() }}</td>
@@ -36,6 +36,17 @@
             {% endfor %}
             </tbody>
         </table>
+        {% for page_num in tasks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if page_num == tasks.page %}
+                    <a href="{{ url_for('index', page=page_num) }}" class="btn btn-info mb-4">{{ page_num }}</a>
+                {% else %}
+                    <a href="{{ url_for('index', page=page_num) }}" class="btn btn-outline-info mb-4">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                ...
+            {% endif %}
+        {% endfor %}
     {% else %}
         <h4>No Tasks! Add Tasks to Display!</h4>
     {% endif %}
